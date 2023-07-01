@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diagnoseMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="machine.microspin.com.ringDoubler.Diagnose">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_diagnostics"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/diagnoseMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/testTypeLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:text="@string/label_diagnose_type" />
+
+            <Spinner
+                android:id="@+id/testType"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:prompt="@string/prompt_select_one"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/MotorValueLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:text="@string/label_diagnose_motor_name" />
+
+            <Spinner
+                android:id="@+id/motorValue"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:prompt="@string/prompt_select_one"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/maxMotorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingTop="0dp">
+
+            <TextView
+                android:id="@+id/maxMotorVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:text="@string/label_diagnose_motor_maxRPM" />
+
+            <TextView
+                android:id="@+id/maxRpmVal"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
+            android:paddingTop="0dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/NormalSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/targetRPM"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_target_rpm_percent" />
+
+                    <machine.microspin.com.ringDoubler.EditTextCustom
+                        android:id="@+id/targetRpmPercent"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/rpmTargetText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_target_rpm" />
+
+                    <TextView
+                        android:id="@+id/targetRPMout"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_weight="0"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/signalLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_ip_signal" />
+
+                    <EditText
+                        android:id="@+id/signalValue"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="center"
+                        tools:ignore="LabelFor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/testRunTimeValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_run_time" />
+
+                    <EditText
+                        android:id="@+id/testRunTime"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="center"
+                        tools:ignore="LabelFor" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LiftSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_direction" />
+
+                    <Spinner
+                        android:id="@+id/directionSpinner"
+                        android:layout_width="145dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.13" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_distance" />
+
+                    <EditText
+                        android:id="@+id/distanceEnter"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginLeft="75dp"
+                        android:layout_weight="0"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="0dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/runDiagnose"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="250dp"
+                android:background="@drawable/capsule_btn_green"
+                android:paddingTop="0dp"
+                android:text="@string/btn_diagnose_run"
+                android:textColor="@android:color/background_light"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/diagnoseLive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/TestTypeBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/typeOfTestLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:text="@string/label_diagnose_type"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/typeOfTestLive"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/MotorCodeBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/motorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:text="@string/label_diagnose_motor_name"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/motorCodeLive"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/liftLive"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="30dp"
+                    android:text="@string/label_diagnose_lift_msg"
+                    android:textAllCaps="true"
+                    android:textColor="?android:attr/colorActivatedHighlight"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/liveliftprogressBar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="?attr/colorPrimary"
+                    android:paddingTop="0dp"
+                    android:rotation="0" />
+
+                <TextView
+                    android:id="@+id/liftDone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_diagnose_lift_msgDone"
+                    android:textAllCaps="true"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/normalLive"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/TargetRPMBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/targetlabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/targetText"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/SignalVoltageBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/signalVoltgaeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_ip_signal"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/shape_box_rect_black_thin">
+
+                        <TextView
+                            android:id="@+id/signalVoltgaeLive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ActualTargetBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tragetRPMlabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/label_diagnose_live_rpm"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/shape_box_rect_black_thin">
+
+                        <TextView
+                            android:id="@+id/actualRPMLive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

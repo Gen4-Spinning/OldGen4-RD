@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="machine.microspin.com.ringDoubler.DashboardRunMode">
+    <item
+        android:id="@+id/action_quit"
+        android:orderInCategory="100"
+        android:title="@string/label_exit"
+        app:showAsAction="never" />
+</menu>
