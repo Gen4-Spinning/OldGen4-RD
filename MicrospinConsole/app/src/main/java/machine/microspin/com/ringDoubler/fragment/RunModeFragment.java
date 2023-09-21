@@ -3,6 +3,7 @@ package machine.microspin.com.ringDoubler.fragment;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class RunModeFragment extends Fragment implements Pattern, View.OnClickLi
         statusText = (TextView) rootView.findViewById(R.id.statusText);
         attr1Value = (TextView) rootView.findViewById(R.id.attr1Value);
         attr2Value = (TextView) rootView.findViewById(R.id.attr2Value);
+        attr3Value = (TextView) rootView.findViewById(R.id.attr3Value);
         //=>Stop Screen Layout
         reasonText = (TextView) rootView.findViewById(R.id.reasonText);
         reasonTypeText = (TextView) rootView.findViewById(R.id.reasonTypeLabel);
@@ -78,19 +80,22 @@ public class RunModeFragment extends Fragment implements Pattern, View.OnClickLi
             public void run() {
                 Packet packet = new Packet(Packet.INCOMING_PACKET);
                 //int attrCount = packet.getAttributeCount()
+
                 if (packet.processIncomePayload(payload)) {
+
                     statusBox.setVisibility(View.VISIBLE);
                     canEdit = false;
 
                     TLV[] attr = packet.getAttributes();
                     if (packet.getNextScreen().equals(Screen.RUN.name())) {
                         toggleVisibility(Screen.RUN.name());
-
                         attr1Value.setText(attr[0].getValue()); // SpindleSpeed
-                        attr2Value.setText(attr[1].getValue()); // Doff Percent
+                        attr2Value.setText(attr[1].getValue()); // left Doff Percent
+                        attr3Value.setText(attr[2].getValue()); // right Doff Percent
                         haltMessageIsOpen = false;
                     }
                     if (packet.getNextScreen().equals(Screen.STOP.name())) {
+                       // Log.d("MC","stopScreen");
                         errorBox.setVisibility(View.INVISIBLE);
                         valueBox.setVisibility(View.INVISIBLE);
                         toggleVisibility(Screen.STOP.name());
@@ -124,6 +129,7 @@ public class RunModeFragment extends Fragment implements Pattern, View.OnClickLi
                             }
                         }
                     if (packet.getNextScreen().equals(Screen.IDLE.name())) {
+                      //  Log.d("MC","idleScreen");
                         canEdit = true;
                         mCallback.updateIdleModeStatus(true);
                         toggleVisibility(Screen.IDLE.name());
@@ -133,6 +139,7 @@ public class RunModeFragment extends Fragment implements Pattern, View.OnClickLi
                     }
                     statusText.setText(Utility.formatString(packet.getScreenSubState()));
                 }
+              //  Log.d("MC","uiupdate");
             }
         });
     }

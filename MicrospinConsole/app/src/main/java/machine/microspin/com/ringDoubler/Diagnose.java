@@ -233,12 +233,13 @@ public class Diagnose extends AppCompatActivity implements View.OnClickListener,
 
     private int GetMaxRPM(String motorSelected)
     {   int maxRpm1 = 0;
-        if (motorSelected.equals(Pattern.MotorTypes.SPINDLE.toString())){
+        /*if (motorSelected.equals(Pattern.MotorTypes.SPINDLE.toString())){
             maxRpm1 = 3000;
         }
         else {
             maxRpm1 = 1500;
-        }
+        }*/
+        maxRpm1 = 1500;
         return maxRpm1;
     }
 

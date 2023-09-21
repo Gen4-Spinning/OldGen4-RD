@@ -89,6 +89,7 @@ public class DashboardRunMode extends AppCompatActivity implements SettingsCommu
         if (runFragment instanceof RunModeFragment) {
             try {
                 String payload = new String(bytes, "UTF-8").replaceAll("(\\r|\\n)", "");
+                //Log.d("payload",payload);
                 if (!payload.isEmpty()) {
                     //=============================================================
                     String packetPayload;
@@ -124,9 +125,10 @@ public class DashboardRunMode extends AppCompatActivity implements SettingsCommu
                             packetPayload = payload;
                     }
 
-                    if (packetPayload.length() >= 20) { //size of header is 20 . Min Size of packet 20
-
+                    if (packetPayload.length() >= 15) { //size of header is 20 . Min Size of packet 20
+                       // Log.d("MC","sizeOK");
                         if (Packet.getHeadersScreen(packetPayload).equals(Pattern.Screen.SETTING.name())) {
+                          //  Log.d("MC","inSettings");
                             if (Packet.getHeadersSubScreen(packetPayload).equals(Pattern.ScreenSubState.ACK.name())) {
                                 if (isWaitingForAck) {
                                     isWaitingForAck = false;
@@ -151,6 +153,7 @@ public class DashboardRunMode extends AppCompatActivity implements SettingsCommu
                             }
                         } else {
                             //Update Run, Stop & Idle Mode Screen(s)
+                           // Log.d("MC","run/idle/stop");
                             runFragment.updateContent(packetPayload);
                             Boolean canEditSettings = runFragment.canEditSettings();
                             settingsFragment.isEditMode(canEditSettings);

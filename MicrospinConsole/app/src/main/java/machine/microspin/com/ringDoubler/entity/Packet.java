@@ -52,6 +52,7 @@ public class Packet implements Pattern {
         if (payload.length() < 20) {
             return false;
         }
+     //  Log.d("payloadProcess","packetLengthOK");
 
         this.SOF = payload.substring(0, 2);
         int packetLength = payload.length();
@@ -68,12 +69,13 @@ public class Packet implements Pattern {
         this.msgType = payload.substring(10, 12);
         this.nextScreen = payload.substring(12, 14);
         this.screenSubState = payload.substring(14, 16);
-        Log.d("MC","nextScreen = " + this.nextScreen);
-        Log.d("MC","screen substate = " + this.screenSubState);
+       // Log.d("MC","nextScreen = " + this.nextScreen);
+        //Log.d("MC","screen substate = " + this.screenSubState);
 
         this.attributeCount = Integer.parseInt(payload.substring(16, 18));
+       // Log.d("MC","attributeCount = " + this.attributeCount);
+       // Log.d("MC",payload);
         this.attributes = new TLV[this.attributeCount];
-
         int k = 18;                                                                                 // Attributes start index
         for (int i = 0; i < this.attributeCount; i++) {
             type = payload.substring(k, k + 2);
@@ -83,10 +85,10 @@ public class Packet implements Pattern {
             int tempLength = Integer.parseInt(length);
             value = payload.substring(k, k + (tempLength * 2));
             k = k + (tempLength * 2);
-
             this.attributes[i] = new TLV(type, length, value, getNextScreen());
-        }
 
+        }
+       // Log.d("MC",this.attributes[2].getValue());
         return true;
     }
 

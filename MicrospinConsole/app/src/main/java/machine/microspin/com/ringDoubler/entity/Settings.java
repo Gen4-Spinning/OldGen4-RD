@@ -4,33 +4,31 @@ import android.bluetooth.BluetoothDevice;
 import android.util.Log;
 
 /**
- * Settings Repo for storing setting vars throughout the application lifetime
+ * Settings Repo for storing setting vars throughout the application lifetime\
+ * ilocos code
  */
 
 public class Settings {
 
     public static BluetoothDevice device;
     //===== Settings Parameters =======
+    private static int inputYarnCountInNe;
     private static int spindleSpeed;
-    private static int tensionDraft;
+    private static float outputYarnDia;
     private static int twistPerInch;
-    private static int yarncount;
-    private static float bindWindRatio;
-    private static float chaseLength;
-    private static int preferredPackageSize;
-    private static int rightSideOn;
-    private static int leftSideOn;
+    private static int packageHeight;
+    private static float diaBuildFactor;
+    private static int windingClosenessFactor;
+    private static float windingOffsetCoils;
     //Default settings for factory settings
-    private static int defaultspindleSpeed = 7000;
-    private static int defaulttensionDraft = 5;
-    private static int defaulttwistPerInch = 12;
-    private static int defaultyarncount= 14; // 24 in Ne = 24 * 0.6 in Nm = 14.4 = 14
-    private static float defaultbindWindRatio = 2.0f;
-    private static float defaultchaseLength = 55.0f;
-    private static int defaultpreferredPackageSize = 110;
-    private static int defaultrightSideOn = 1;
-    private static int defaultleftSideOn = 1;
-
+    private static int defaultInputYarnCountInNe = 30;
+    private static int defaultspindleSpeed = 8000;
+    private static float defaultOutputYarnDia = 0.31f;
+    private static int defaultTPI = 20;
+    private static int defaultPackageHeight = 200;
+    private static float defaultDiaBuildFactor = 0.6f;
+    private static int defaultWindingClosenessFactor = 108;
+    private static float defaultWindingOffsetCoils = 1.5f;
 
     private static String machineId = "01"; //default
     //==== END: Settings Parameters ====
@@ -68,35 +66,33 @@ public class Settings {
         machineId = payload.substring(6, 8);
 
         // Mapping Setting Parameters.
-        int yarncountNe = Utility.convertHexToInt(payload.substring(22, 26));
-        yarncount =  Math.round(yarncountNe/0.3f) ;
-
-        spindleSpeed = Utility.convertHexToInt(payload.substring(26, 30));
-        tensionDraft = Utility.convertHexToInt(payload.substring(30, 34));
-        twistPerInch = Utility.convertHexToInt(payload.substring(34, 38));
-        bindWindRatio = Utility.convertHexToFloat(payload.substring(38, 46));
-        chaseLength = Utility.convertHexToFloat(payload.substring(46,54));
-        preferredPackageSize = Utility.convertHexToInt(payload.substring(54, 58));
-        rightSideOn = Utility.convertHexToInt(payload.substring(58, 62));
-        leftSideOn = Utility.convertHexToInt(payload.substring(62, 66));
-
+        inputYarnCountInNe = Utility.convertHexToInt(payload.substring(22, 26));
+        outputYarnDia = Utility.convertHexToFloat(payload.substring(26, 34));
+        spindleSpeed = Utility.convertHexToInt(payload.substring(34, 38));
+        twistPerInch = Utility.convertHexToInt(payload.substring(38, 42));
+        packageHeight = Utility.convertHexToInt(payload.substring(42, 46));
+        diaBuildFactor = Utility.convertHexToFloat(payload.substring(46,54));
+        windingClosenessFactor = Utility.convertHexToInt(payload.substring(54, 58));
+        windingOffsetCoils = Utility.convertHexToFloat(payload.substring(58, 66));
+        Log.d("Settings","recieved!" + inputYarnCountInNe +"," + outputYarnDia +"," + spindleSpeed + "," + twistPerInch
+            + "," + packageHeight +"," + diaBuildFactor + "," + windingClosenessFactor + "," + windingOffsetCoils);
         return true;
     }
 
-    public static String updateNewSetting(String s1, String s2, String s3, String s4, String s5, String s6, String s7,String s8,String s9) {
+    public static String updateNewSetting(String s1, String s2, String s3, String s4, String s5, String s6, String s7,String s8) {
         // Update new values in Repo.
 
-        yarncount = Integer.parseInt(s1);//we ll get a Nm , but we need to pass an Ne
-        int output_yarnCount = Math.round(yarncount * 0.3f); //for ring doubler, we want to set the coutn in Nm, not ne. Ne = nm*0.6,
-        spindleSpeed = Integer.parseInt(s2);//and then we re doubling so the yarn thickness will double, so divide by 2. this is so that the builder works ok.
-        tensionDraft = Integer.parseInt(s3);
+        inputYarnCountInNe = Integer.parseInt(s1);
+        outputYarnDia = Float.parseFloat(s2);
+        spindleSpeed = Integer.parseInt(s3);
         twistPerInch = Integer.parseInt(s4);
-        bindWindRatio = Float.parseFloat(s5);
-        chaseLength = Float.parseFloat(s6);
-        preferredPackageSize = Integer.parseInt(s7);
-        rightSideOn = Integer.parseInt(s8);
-        leftSideOn = Integer.parseInt(s9);
+        packageHeight = Integer.parseInt(s5);
+        diaBuildFactor = Float.parseFloat(s6);
+        windingClosenessFactor = Integer.parseInt(s7);
+        windingOffsetCoils = Float.parseFloat(s8);
 
+        Log.d("Settings",inputYarnCountInNe +"," + outputYarnDia +"," + spindleSpeed +"," + twistPerInch
+        + "," +packageHeight +"," + diaBuildFactor + "," + windingClosenessFactor +"," + windingOffsetCoils);
         // Construct payload String
         StringBuilder payload = new StringBuilder();
 
@@ -114,33 +110,29 @@ public class Settings {
         attrPayload.append(ATTR_TYPE_RINGFRAME_PATTERN).
                 append(String.format("%02d", ATTR_LENGTH));
 
-        String attr = Utility.convertIntToHexString(output_yarnCount);
+        String attr = Utility.convertIntToHexString(inputYarnCountInNe);
         attrPayload.append(Utility.formatValueByPadding(attr,2));
+
+        attr = Utility.convertFloatToHex(outputYarnDia);
+        attrPayload.append(Utility.formatValueByPadding(attr,4));
 
         attr = Utility.convertIntToHexString(spindleSpeed);
-        attrPayload.append(Utility.formatValueByPadding(attr,2));
-
-        attr = Utility.convertIntToHexString(tensionDraft);
         attrPayload.append(Utility.formatValueByPadding(attr,2));
 
         attr = Utility.convertIntToHexString(twistPerInch);
         attrPayload.append(Utility.formatValueByPadding(attr,2));
 
-        attr = Utility.convertFloatToHex(bindWindRatio);
+        attr = Utility.convertIntToHexString(packageHeight);
+        attrPayload.append(Utility.formatValueByPadding(attr,2));
+
+        attr = Utility.convertFloatToHex(diaBuildFactor);
         attrPayload.append(Utility.formatValueByPadding(attr,4));
 
-        attr = Utility.convertFloatToHex(chaseLength);
+        attr = Utility.convertIntToHexString(windingClosenessFactor);
+        attrPayload.append(Utility.formatValueByPadding(attr,2));
+
+        attr = Utility.convertFloatToHex(windingOffsetCoils);
         attrPayload.append(Utility.formatValueByPadding(attr,4));
-
-        attr = Utility.convertIntToHexString(preferredPackageSize);
-        attrPayload.append(Utility.formatValueByPadding(attr,2));
-
-        attr = Utility.convertIntToHexString(rightSideOn);
-        attrPayload.append(Utility.formatValueByPadding(attr,2));
-
-        attr = Utility.convertIntToHexString(leftSideOn);
-        attrPayload.append(Utility.formatValueByPadding(attr,2));
-
 
         //Construct payload string
         payload.append(SOF).
@@ -155,6 +147,7 @@ public class Settings {
                 append(attrPayload.toString()).
                 append(EOF);
 
+        Log.d("Setting",payload.toString());
         return payload.toString();
 
     }
@@ -163,91 +156,71 @@ public class Settings {
     public static int getSpindleSpeed() {
         return spindleSpeed;
     }
+    public static int getYarnCount() {
+        return inputYarnCountInNe;
+    }
+    public static float getOutputYarnDia() {
+        return outputYarnDia;
+    }
 
+    public static String getYarnCountString() {
+        return String.format("%d", inputYarnCountInNe);
+    }
+    public static String GetOutputYarnDiaString() {
+        String s =  String.format("%f", outputYarnDia);
+        return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
+    }
     public static String getSpindleSpeedString() {
         return String.format("%d", spindleSpeed);
     }
-
-    public static float getTensionDraft() {
-        return tensionDraft;
-    }
-
-    public static String getTensionDraftString() {
-        return  String.format("%d", tensionDraft);
-    }
-
-    public static int getYarnCount() {
-        return yarncount;
-    }
-    public static String getYarnCountString() {
-        return String.format("%d", yarncount);
-    }
-
     public static String getTwistPerInchString() {
         return  String.format("%d", twistPerInch);
     }
-
-    public static String getBindWindRatioString() {
-        String s =  String.format("%f", bindWindRatio);
+    public static String getPackageHeightString() { return String.format("%d", packageHeight);}
+    public static String getDiaBuildFactorString() {
+        String s = String.format("%f", diaBuildFactor);
         return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
     }
+    public static String getWindingClosenessFactorString() {
+        return String.format("%d", windingClosenessFactor);}
 
-
-    public static String getChaseLengthString() {
-        String s = String.format("%f", chaseLength);
+    public static String getWindingOffsetCoilsString() {
+        String s = String.format("%f", windingOffsetCoils);
         return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
     }
-
-
-    public static String getPreferredPackageSizeString() {
-        return String.format("%d", preferredPackageSize);
-    }
-
-    public static String getrightSideOnString() {
-        return String.format("%d", rightSideOn);
-    }
-
-    public static String getleftSideOnString() {
-        return String.format("%d", leftSideOn);
-    }
-
 
 
     public static String getDefaultSpindleSpeedString() {
         return String.format("%d", defaultspindleSpeed);
     }
 
-    public static String getDefaultTensionDraftString() {
-        return String.format("%d", defaulttensionDraft);    }
+    public static String getDefaultOutputYarnDiaString() {
+        String s = String.format("%f", defaultOutputYarnDia);
+        return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
+    }
 
     public static String getDefaultYarnCountString() {
-        return String.format("%d", defaultyarncount);
+        return String.format("%d", defaultInputYarnCountInNe);
     }
 
     public static String getDefaultTwistPerInchString() {
-        return String.format("%d", defaulttwistPerInch);   }
+        return String.format("%d", defaultTPI);   }
 
-    public static String getDefaultBindWindRatioString() {
-        String s =  String.format("%f", defaultbindWindRatio);
+    public static String defaultDiaBuildFactorString() {
+        String s =  String.format("%f", defaultDiaBuildFactor);
         return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
     }
 
+    public static String geDefaultPackageHeightString() {
+        return String.format("%d", defaultPackageHeight);
+    }
 
-    public static String getDefaultChaseLengthString() {
-        String s = String.format("%f", defaultchaseLength);
+    public static String getDefaultWindingClosenessFactorString() {
+        return String.format("%d", defaultWindingClosenessFactor);
+    }
+    public static String getDefaultWindingOffsetCoils() {
+        String s =  String.format("%f", defaultWindingOffsetCoils);
         return !s.contains(".") ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
-    }
-
-
-    public static String getDefaultPreferredPackageSizeString() {
-        return String.format("%d", defaultpreferredPackageSize);
-    }
-    public static String getDefaultrightSideOnString() {
-        return String.format("%d", defaultrightSideOn);
-    }
-
-    public static String getDefaultleftSideOnString() {
-        return String.format("%d", defaultleftSideOn);
     }
 
 }

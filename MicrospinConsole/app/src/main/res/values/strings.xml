@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">"RingDoubler"</string>
     <string name="version">"Ver:"</string>
-    <string name="code">"AM-RD-V01"</string>
+    <string name="code">"IL-RD-V02"</string>
     <string name="action_scan">SCAN</string>
     <string name="action_stop">STOP</string>
     <string name="action_restart">Restart</string>
@@ -46,19 +46,18 @@
     <string name="label_param_2">Layers</string>
     <string name="label_param_3">RTF</string>
     <string name="label_param_4">Spindle Speed (rpm)</string>
-    <string name="label_param_5">Doff Percent (%)</string>
+    <string name="label_param_5">Left Doff Percent (%)</string>
+    <string name="label_param_6">Right Doff Percent (%)</string>
 
     <!--******************* Settings ************************-->
-    <string name="label_setting_1">Input Yarn Count (Nm)</string>
-    <string name="label_setting_2">Spindle Speed (rpm)</string>
-    <string name="label_setting_3">Draft </string>
+    <string name="label_setting_1">Input Yarn Count (Ne)</string>
+    <string name="label_setting_2">Output Yarn Dia (mm)</string>
+    <string name="label_setting_3">Spindle Speed (rpm) </string>
     <string name="label_setting_4">Twist Per Inch</string>
-    <string name="label_builder">Builder</string>
-    <string name="label_setting_5">Bind Wind Ratio</string>
-    <string name="label_setting_6">Chase Length (mm)</string>
-    <string name="label_setting_7">Preferred package size(%)</string>
-    <string name="label_setting_8">Right Side On</string>
-    <string name="label_setting_9">Left Side On</string>
+    <string name="label_setting_5">Package Height (mm)</string>
+    <string name="label_setting_6">Dia Build Factor </string>
+    <string name="label_setting_7">Winding Closeness Factor</string>
+    <string name="label_setting_8">Winding Offset Coils</string>
 
     <string name="msg_doffSetting_reset">Doff Over! Press Start to Home</string>
     <string name="msg_setting_updated">Settings Updated</string>

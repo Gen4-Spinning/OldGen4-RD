@@ -74,11 +74,11 @@
 
                 <EditText
                     android:id="@+id/setting1"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     tools:ignore="LabelFor" />
             </LinearLayout>
 
@@ -97,20 +97,20 @@
 
                 <EditText
                     android:id="@+id/setting2"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     tools:ignore="LabelFor" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/draftLayout"
+                android:id="@+id/spindleRPMLayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/setting3Label"
@@ -120,14 +120,11 @@
                     android:layout_weight="1"
                     android:text="@string/label_setting_3" />
 
-                <EditText
-                    android:id="@+id/setting3"
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:ems="10"
-                    android:inputType="number|numberDecimal"
-                    tools:ignore="LabelFor" />
+                <Spinner
+                    android:id="@+id/spindleSpinner"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -145,19 +142,13 @@
 
                 <EditText
                     android:id="@+id/setting4"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
-                    android:inputType="number|numberDecimal"
+                    android:inputType="number"
                     tools:ignore="LabelFor" />
             </LinearLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,11 +165,11 @@
 
                 <EditText
                     android:id="@+id/setting5"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
-                    android:inputType="number|numberDecimal"
+                    android:inputType="number"
                     tools:ignore="LabelFor" />
             </LinearLayout>
 
@@ -197,7 +188,7 @@
 
                 <EditText
                     android:id="@+id/setting6"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
@@ -220,7 +211,7 @@
 
                 <EditText
                     android:id="@+id/setting7"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
@@ -228,18 +219,12 @@
                     tools:ignore="LabelFor" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
             <LinearLayout
-                android:id="@+id/rightSideOnLayout"
+                android:id="@+id/windingOffsetCoils"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/setting8Label"
@@ -251,36 +236,11 @@
 
                 <EditText
                     android:id="@+id/setting8"
-                    android:layout_width="97dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:ems="10"
-                    android:inputType="number"
-                    tools:ignore="LabelFor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/leftSideOnLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:visibility="gone">
-
-                <TextView
-                    android:id="@+id/setting9Label"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_weight="1"
-                    android:text="@string/label_setting_9" />
-
-                <EditText
-                    android:id="@+id/setting9"
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:ems="10"
-                    android:inputType="number"
+                    android:inputType="number|numberDecimal"
                     tools:ignore="LabelFor" />
             </LinearLayout>
 

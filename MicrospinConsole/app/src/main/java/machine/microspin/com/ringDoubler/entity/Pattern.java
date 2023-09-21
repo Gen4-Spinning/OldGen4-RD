@@ -64,7 +64,7 @@ public interface Pattern {
     }
 
     enum MotorTypes { // Specific to Flyer Frame. NOT GENERAL
-        FRONT_ROLLER_RIGHT, FRONT_ROLLER_LEFT,LIFT_RIGHT,LIFT_LEFT,SPINDLE
+        FRONT_ROLLER_RIGHT, FRONT_ROLLER_LEFT,LIFT_RIGHT,LIFT_LEFT//,SPINDLE
     }
 
     /* OUTGOING PACKET PATTERNS */
@@ -99,6 +99,8 @@ public interface Pattern {
     enum Setting {
         DELIVERY_SPEED, TENSION_DRAFT, CYLINDER_SPEED, CYLINDER_FEED, BEATER_SPEED, BEATER_FEED, CONVEYOR_SPEED, CONVEYOR_DELAY, CONVEYOR_DWELL
     }
+
+
 
     /* INCOMING PACKET PATTERNS MAPPING */
     Map<String, String> machineTypeMap = new HashMap<String, String>() {
@@ -215,7 +217,7 @@ public interface Pattern {
             put(MotorTypes.FRONT_ROLLER_LEFT.name(), "72");
             put(MotorTypes.LIFT_RIGHT.name(), "74");
             put(MotorTypes.LIFT_LEFT.name(), "75");
-            put(MotorTypes.SPINDLE.name(), "76");
+            //put(MotorTypes.SPINDLE.name(), "76");
         }
     };
 
